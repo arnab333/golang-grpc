@@ -8,10 +8,6 @@ type Server struct {
 	UnimplementedUserServiceServer
 }
 
-var user = User{
-	Id: 1, Fname: "User1", City: "City1", Phone: 123, Height: 32.12, Married: false,
-}
-
 var users = &Users{
 	User: []*User{
 		{Id: 1, Fname: "User1", City: "City1", Phone: 123, Height: 32.12, Married: false},
