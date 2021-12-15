@@ -14,7 +14,7 @@ message User {
 }
 
 message Users {
-    repeated User user = 1;
+    repeated User users = 1;
 }
 
 message UserID {
@@ -23,9 +23,15 @@ message UserID {
 
 message EmptyParams {}
 
+message UserIDList {
+    repeated int64 userIDList = 1;
+}
+
 service UserService {
     rpc GetUsers(EmptyParams) returns (Users) {}
     rpc GetUser(UserID) returns (User) {}
+    rpc GetUsersWithIds(UserIDList) returns (Users) {}
 }
+
 
 
