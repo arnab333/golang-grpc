@@ -2,6 +2,8 @@ package user
 
 import (
 	"golang.org/x/net/context"
+
+	"google.golang.org/grpc/status"
 )
 
 type Server struct {
@@ -28,11 +30,18 @@ func (s *Server) GetUser(ctx context.Context, u *UserID) (*User, error) {
 			break
 		}
 	}
+
+	if userData == nil {
+		return &User{}, status.Error(5, "UserID does not exists")
+	}
 	return userData, nil
 }
 
 func (s *Server) GetUsersWithIds(ctx context.Context, ids *UserIDList) (*Users, error) {
-	var userWithIds Users
+	var userWithIds *Users
+	if len(ids.UserIDList) == 0 {
+		return &Users{}, status.Error(3, "UserIDList is empty")
+	}
 	for _, user := range users.Users {
 		for _, id := range ids.UserIDList {
 			if user.Id == id {
@@ -42,5 +51,9 @@ func (s *Server) GetUsersWithIds(ctx context.Context, ids *UserIDList) (*Users, 
 		}
 	}
 
-	return &userWithIds, nil
+	if userWithIds == nil {
+		return &Users{}, status.Error(5, "Provided UserID not found")
+	}
+
+	return userWithIds, nil
 }
