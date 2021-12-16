@@ -10,3 +10,15 @@
 
 - To run the server - `go run server.go`
 - To run the client - `cd client && go run client.go`
+
+## Run Docker Container
+
+### In Development
+
+- docker-compose up
+
+### In Production
+
+- docker build -t golang-grpc-prod . --target production
+
+- docker run -p 4000:4000 --name golang-grpc-prod golang-grpc-prod

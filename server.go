@@ -10,10 +10,10 @@ import (
 )
 
 func main() {
-	listener, err := net.Listen("tcp", ":9000")
+	listener, err := net.Listen("tcp", ":4000")
 
 	if err != nil {
-		log.Fatalf("Failed to listen on port 9000: %v", err)
+		log.Fatalf("Failed to listen on port 4000: %v", err)
 	}
 
 	s := user.Server{}
@@ -22,7 +22,11 @@ func main() {
 
 	user.RegisterUserServiceServer(grpcServer, &s)
 
-	if err := grpcServer.Serve(listener); err != nil {
-		log.Fatalf("Failed to serve gRPC server over port 9000: %v", err)
+	log.Println("Server is running!")
+
+	err = grpcServer.Serve(listener)
+	if err != nil {
+		log.Fatalf("Failed to serve gRPC server over port 4000: %v", err)
 	}
+
 }

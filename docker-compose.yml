@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: golang-grpc-dev
+    image: golang-grpc-dev
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/app
+    ports:
+      - 4000:4000
