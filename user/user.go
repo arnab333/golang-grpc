@@ -52,7 +52,7 @@ func (s *Server) GetUsersWithIds(ctx context.Context, ids *UserIDList) (*Users, 
 	}
 
 	if userWithIds == nil {
-		return &Users{}, status.Error(5, "Provided UserID not found")
+		return &Users{}, status.Error(5, "Provided UserIDs not found")
 	}
 
 	return userWithIds, nil
